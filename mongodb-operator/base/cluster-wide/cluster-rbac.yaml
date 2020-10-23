@@ -1,0 +1,63 @@
+# This ClusterRole is necessary for the operator to be able to work across the cluster
+kind:  ClusterRole 
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: enterprise-operator
+  namespace: mongodb
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - secrets
+  - services
+  verbs:
+  - get
+  - list
+  - create
+  - update
+  - delete
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - statefulsets
+  verbs:
+  - create
+  - get
+  - list
+  - watch
+  - delete
+  - update
+- apiGroups:
+  - mongodb.com
+  resources:
+  - mongodb
+  - mongodb/finalizers
+  - mongodbusers
+  - opsmanagers
+  - opsmanagers/finalizers
+  - mongodb/status
+  - mongodbusers/status
+  - opsmanagers/status
+  verbs:
+  - "*"
+# This ClusterRoleBinding is necessary in order to use validating
+# webhooks—these will prevent you from applying a variety of invalid resource
+# definitions. The validating webhooks are optional so this can be removed if
+# necessary.
+---
+# Source: mongodb-enterprise-operator/templates/operator-roles.yaml
+kind:  ClusterRoleBinding 
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: enterprise-operator
+  namespace: mongodb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind:  ClusterRole 
+  name: enterprise-operator
+subjects:
+- kind: ServiceAccount
+  name: enterprise-operator
+  namespace: mongodb

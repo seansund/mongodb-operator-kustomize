@@ -1,0 +1,12 @@
+bases:
+  - mongodb
+  - cluster-wide
+
+patchesJson6902:
+  - path: json6902-patches/deployment-watch-namespace.yaml
+    target:
+        group: apps
+        version: v1
+        kind: Deployment
+        name: enterprise-operator
+        namespace: mongodb

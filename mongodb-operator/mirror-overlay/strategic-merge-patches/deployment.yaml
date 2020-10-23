@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enterprise-operator
+  namespace: mongodb
+spec:
+  template:
+    spec:
+      containers:
+      - name: mongodb-enterprise-operator
+        env:
+        - name: MONGODB_ENTERPRISE_DATABASE_IMAGE
+          value: redhat.mymirror.com/mongodb/enterprise-database
+        - name: INIT_DATABASE_IMAGE_REPOSITORY
+          value: redhat.mymirror.com/mongodb/mongodb-enterprise-init-database
+        - name: OPS_MANAGER_IMAGE_REPOSITORY
+          value: redhat.mymirror.com/mongodb/mongodb-enterprise-ops-manager
+        - name: INIT_OPS_MANAGER_IMAGE_REPOSITORY
+          value: redhat.mymirror.com/mongodb/mongodb-enterprise-init-ops-manager
+        - name: APPDB_IMAGE_REPOSITORY
+          value: redhat.mymirror.com/mongodb/mongodb-enterprise-appdb
+        - name: INIT_APPDB_IMAGE_REPOSITORY
+          value: redhat.mymirror.com/mongodb/mongodb-enterprise-init-appdb

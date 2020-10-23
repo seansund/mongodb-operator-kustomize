@@ -1,0 +1,9 @@
+bases:
+  - ../base
+
+patchesStrategicMerge:
+  - strategic-merge-patches/deployment.yaml
+
+images:
+    - name: registry.connect.redhat.com/mongodb/enterprise-operator
+      newName: redhat.mymirror.com/mongodb/enterprise-operator
