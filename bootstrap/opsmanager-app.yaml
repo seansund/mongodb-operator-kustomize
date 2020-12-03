@@ -8,7 +8,7 @@ spec:
     server: https://kubernetes.default.svc
   project: opsmanager
   source:
-    path: opsmanager/overlay
+    path: opsmanager/base
     repoURL: https://github.com/seansund/mongodb-operator-kustomize.git
     targetRevision: master
   syncPolicy:
