@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mongodb-operator
+spec:
+  destination:
+    namespace: mongodb
+    server: https://kubernetes.default.svc
+  project: mongodb-operator
+  source:
+    path: mongodb-operator/base
+    repoURL: https://github.com/seansund/mongodb-operator-kustomize.git
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
