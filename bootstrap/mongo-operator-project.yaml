@@ -1,0 +1,10 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: mongodb-operator
+spec:
+  destinations:
+  - namespace: 'mongodb'
+    server: 'https://kubernetes.default.svc'
+  sourceRepos:
+  - 'https://github.com/seansund/mongodb-operator-kustomize.git'
